@@ -211,7 +211,7 @@ This may indicate:
 
 ---
 
-### 📊 SOC Summary
+### SOC Summary
 
 From the log analysis:
 - Detected brute force-like behavior (401/403 spikes)
