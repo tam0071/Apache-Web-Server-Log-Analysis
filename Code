@@ -92,16 +92,12 @@ awk '{print $7}' access.log | sort | uniq -c | sort -nr
 
 ### SOC Security Analysis & Incident Detection
 
-### Brute Force Attack Detection
+### 1. Brute Force Attack Detection
 
 ```bash
 grep " 401 " access.log
 grep " 403 " access.log
 ```
-
-#### Interpretation:
-This behavior is consistent with a **brute force login attack**, where an attacker attempts multiple username/password combinations.
-
 
 ### 🚨 2. Possible Directory Scanning / Reconnaissance
 
@@ -110,13 +106,6 @@ High number of 404 errors were detected from specific IPs.
 ```bash
 grep " 404 " access.log
 ```
-
-#### 🔍 Findings:
-- Repeated requests to non existent pages
-- Pattern of systematic URL guessing
-
-#### ⚠️ Interpretation:
-This indicates a possible **directory brute force / reconnaissance attack**, where an attacker scans for hidden files or admin pages.
 
 ---
 
@@ -128,8 +117,6 @@ Top requesting IP addresses were analyzed:
 awk '{print $1}' access.log | sort | uniq -c | sort -nr
 ```
 
-#### 🔍 Findings:
-- One IP generated unusually high number of requests
 
 
 ---
