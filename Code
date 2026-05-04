@@ -1,0 +1,135 @@
+## Exercise 1: Accessing Apache Log Files
+
+### Steps:
+
+1. On your Linux machine, open the terminal.
+2. Navigate to the Apache log directory:
+
+```bash
+cd /var/log/apache2/
+```
+
+3. List the log files:
+
+```bash
+ls -l
+```
+
+## Understanding Access Logs
+
+Open the access log file:
+
+```bash
+less access.log
+``` 
+
+Identify and analyze entries.
+
+## Exercise : Filtering Log Entries
+
+### Steps:
+
+Filter by IP address:
+
+```bash
+grep '192.168.1.xyz' access.log
+```
+
+Filter by HTTP 404 errors:
+
+```bash
+grep ' 404 ' access.log
+```
+
+Combine filters:
+
+```bash
+grep '192.168.1.xyz' access.log | grep ' 404 '
+```
+
+
+---
+
+## Exercise 4: Analyzing Error Logs
+
+### Steps:
+
+1. Open error log:
+
+```bash
+less error.log
+```
+ 
+
+2. Note timestamps and frequency.
+
+### Expected Output:
+- Understanding of server error patterns.
+
+---
+
+## Exercise 5: Summarizing Log Data
+
+### Steps:
+
+1. Requests per IP:
+
+```bash
+awk '{print $1}' access.log | sort | uniq -c | sort -nr
+```
+
+2. Requests per day:
+
+```bash
+awk '{print $4}' access.log | cut -d: -f1 | sort | uniq -c
+```
+
+3. Most requested URLs:
+
+```bash
+awk '{print $7}' access.log | sort | uniq -c | sort -nr
+```
+
+### SOC Security Analysis & Incident Detection
+
+### Brute Force Attack Detection
+
+```bash
+grep " 401 " access.log
+grep " 403 " access.log
+```
+
+#### Interpretation:
+This behavior is consistent with a **brute force login attack**, where an attacker attempts multiple username/password combinations.
+
+
+### 🚨 2. Possible Directory Scanning / Reconnaissance
+
+High number of 404 errors were detected from specific IPs.
+
+```bash
+grep " 404 " access.log
+```
+
+#### 🔍 Findings:
+- Repeated requests to non existent pages
+- Pattern of systematic URL guessing
+
+#### ⚠️ Interpretation:
+This indicates a possible **directory brute force / reconnaissance attack**, where an attacker scans for hidden files or admin pages.
+
+---
+
+### 🚨 3. Suspicious High Traffic IP
+
+Top requesting IP addresses were analyzed:
+
+```bash
+awk '{print $1}' access.log | sort | uniq -c | sort -nr
+```
+
+#### 🔍 Findings:
+- One IP generated unusually high number of requests
+
+
+---
