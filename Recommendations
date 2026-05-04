@@ -1,0 +1,14 @@
+Brute Force Attack prevention 
+- Block suspicious IP using firewall (iptables / ufw)
+- Enable rate limiting
+- Implement account lockout policies
+
+Possible Directory Scanning prevention
+- Use Web Application Firewall (WAF) 
+- Hide sensitive endpoints 
+- Monitor repeated 404 spikes
+
+Suspicious High Traffic IP Top requesting IP addresses were analyzed
+- Rate limiting per IP 
+- Temporary IP blocking 
+- Monitor traffic baseline
