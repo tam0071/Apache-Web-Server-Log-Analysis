@@ -158,14 +158,14 @@ grep " 403 " access.log
 #### Interpretation:
 This behavior is consistent with a **brute force login attack**, where an attacker attempts multiple username/password combinations.
 
-#### 🛡️ Recommendation:
+####  Recommendation:
 - Block suspicious IP using firewall (iptables / ufw)
 - Enable rate limiting
 - Implement account lockout policies
 
 ---
 
-### 🚨 2. Possible Directory Scanning / Reconnaissance
+###  2. Possible Directory Scanning / Reconnaissance
 
 High number of 404 errors were detected from specific IPs.
 
@@ -173,21 +173,21 @@ High number of 404 errors were detected from specific IPs.
 grep " 404 " access.log
 ```
 
-#### 🔍 Findings:
+####  Findings:
 - Repeated requests to non existent pages
 - Pattern of systematic URL guessing
 
-#### ⚠️ Interpretation:
+####  Interpretation:
 This indicates a possible **directory brute force / reconnaissance attack**, where an attacker scans for hidden files or admin pages.
 
-#### 🛡️ Recommendation:
+####  Recommendation:
 - Use Web Application Firewall (WAF)
 - Hide sensitive endpoints
 - Monitor repeated 404 spikes
 
 ---
 
-### 🚨 3. Suspicious High Traffic IP
+###  3. Suspicious High Traffic IP
 
 Top requesting IP addresses were analyzed:
 
@@ -195,23 +195,23 @@ Top requesting IP addresses were analyzed:
 awk '{print $1}' access.log | sort | uniq -c | sort -nr
 ```
 
-#### 🔍 Findings:
+#### Findings:
 - One IP generated unusually high number of requests
 
-#### ⚠️ Interpretation:
+####  Interpretation:
 This may indicate:
 - Bot activity
 - Potential DDoS attempt
 - Automated scanning tool
 
-#### 🛡️ Recommendation:
+####  Recommendation:
 - Rate limiting per IP
 - Temporary IP blocking
 - Monitor traffic baseline
 
 ---
 
-### 📊 SOC Summary
+###  SOC Summary
 
 From the log analysis:
 - Detected brute force-like behavior (401/403 spikes)
